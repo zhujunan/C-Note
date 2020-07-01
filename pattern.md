@@ -1,7 +1,7 @@
 ## Welcome to GitHub Pages
 
 
-```markdown    //```markdown
+```markdown
 Syntax highlighted code block
 
 # Header 1
