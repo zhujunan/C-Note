@@ -1,18 +1,30 @@
-1、说明：创建数据库
-CREATE DATABASE database-name
-2、说明：删除数据库
-drop database dbname
-6、说明：增加一个列
-Alter table tabname add column col type
-7、说明：添加主键： Alter table tabname add primary key(col)
-说明：删除主键： Alter table tabname drop primary key(col)
 
-8、说明：创建索引：create [unique] index idxname on tabname(col….)
-删除索引：drop index idxname
-注：索引是不可更改的，想更改必须删除重新建。
-9、说明：创建视图：create view viewname as select statement
-删除视图：drop view viewname
 
+#[MySQL常用指令](#MySQL常用指令)
+
+#[MySQL条件语句](#MySQL条件语句)
+
+#[MySQL增删改查](#MySQL增删改查)
+
+==============================================
+
+#MySQL常用指令
+
+	1、字符函数
+		concat拼接
+		substr截取子串
+		upper转换成大写
+		lower转换成小写
+		trim去前后指定的空格和字符
+		ltrim去左边空格
+		rtrim去右边空格
+		replace替换
+		lpad左填充
+		rpad右填充
+		instr返回子串第一次出现的索引
+		length 获取字节个数
+		
+	2、数学函数
 
 11、说明：几个高级查询运算词
 A： UNION 运算符
