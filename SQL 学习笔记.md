@@ -1,44 +1,4 @@
 
-
-# [MySQL常用指令](#MySQL常用指令)
-
-# [MySQL条件语句](MySQL条件语句)
-
-# [MySQL增删改查](#MySQL增删改查)
-
-==============================================
-
-#MySQL常用指令
-#MySQL条件语句
-
-	1、字符函数
-		concat拼接
-		substr截取子串
-		upper转换成大写
-		lower转换成小写
-		trim去前后指定的空格和字符
-		ltrim去左边空格
-		rtrim去右边空格
-		replace替换
-		lpad左填充
-		rpad右填充
-		instr返回子串第一次出现的索引
-		length 获取字节个数
-		
-	2、数学函数
-
-11、说明：几个高级查询运算词
-A： UNION 运算符
-UNION 运算符通过组合其他两个结果表（例如 TABLE1 和 TABLE2）并消去表中任何重复行而派生出一个结果表。当 ALL 随 UNION 一起使用时（即 UNION ALL），不消除重复行。两种情况下，派生表的每一行不是来自 TABLE1 就是来自 TABLE2。
-B： EXCEPT 运算符
-EXCEPT 运算符通过包括所有在 TABLE1 中但不在 TABLE2 中的行并消除所有重复行而派生出一个结果表。当 ALL 随 EXCEPT 一起使用时 (EXCEPT ALL)，不消除重复行。
-C： INTERSECT 运算符
-INTERSECT 运算符通过只包括 TABLE1 和 TABLE2 中都有的行并消除所有重复行而派生出一个结果表。当 ALL 随 INTERSECT 一起使用时 (INTERSECT ALL)，不消除重复行。
-注：使用运算词的几个查询结果行必须是一致的。
-
-
- 
-二、提升
 1、说明：复制表(只复制结构,源表名：a 新表名：b) (Access可用)
 法一：select * into b from a where 1<>1（仅用于SQlServer）
 法二：select top 0 * into b from a
