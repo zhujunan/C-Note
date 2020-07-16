@@ -7,7 +7,7 @@
 
 [MySQL数据处理](#MySQL数据处理)
 
-[其它](#其它)
+[其它](#其它.)
 
 ==============================================
 
@@ -22,44 +22,48 @@
 		SET @变量名:=值;
 		SELECT @变量名:=值;				
 
-* 赋值：  
-		方式一：一般用于赋简单的值
-		SET 变量名=值;
-		SET 变量名:=值;
-		SELECT 变量名:=值;
+* 赋值: 
 
-		方式二：一般用于赋表 中的字段值
-		SELECT 字段名或表达式 INTO 变量
-		FROM 表;
+		方式一： 一般用于赋简单的值
+			SET 变量名=值;
+			SET 变量名:=值;
+			SELECT 变量名:=值;
+
+		方式二： 一般用于赋表 中的字段值
+			SELECT 字段名或表达式 INTO 变量
+			FROM 表;
 * 使用：
+
 		select @变量名;
 
-二、局部变量
-
+二、局部变量  
 * 声明：
-	declare 变量名 类型 【default 值】;
+	
+		declare 变量名 类型 【default 值】;
 
 * 赋值：
-	方式一：一般用于赋简单的值
-	SET 变量名=值;
-	SET 变量名:=值;
-	SELECT 变量名:=值;
 
-	方式二：一般用于赋表中的字段值
-	SELECT 字段名或表达式 INTO 变量
-	FROM 表;
+		方式一： 一般用于赋简单的值
+			SET 变量名=值;
+			SET 变量名:=值;
+			SELECT 变量名:=值;
+	
+		方式二： 一般用于赋表中的字段值
+			SELECT 字段名或表达式 INTO 变量
+			FROM 表;
 
 * 使用：
 
-	select 变量名
+		select 变量名
 
 三、二者的区别：
 
-	   作用域		     定义位置	       语法
-用户变量	当前会话		 会话的任何地方	加@符号，不用指定类型
-局部变量	定义它的BEGIN END中 	BEGIN END的第一句话	 一般不用加@,需要指定类型
+		   作用域		     定义位置	       语法
+	用户变量	当前会话		 会话的任何地方	加@符号，不用指定类型
+	局部变量	定义它的BEGIN END中 	BEGIN END的第一句话	 一般不用加@,需要指定类型
 
 ### 常见约束
+
 	NOT NULL
 	DEFAULT
 	UNIQUE
@@ -72,22 +76,24 @@
 * ``着重号，区分同名命令和名称
 
 * 别名
-(1)as
-(2)空格
 
-* 
-	AVG();SUM() 必须数值型
-	MIN();MAX() 任意数据类型
+		(1)as
+		(2)空格
+
+*   
+		AVG();SUM() 必须数值型
+		MIN();MAX() 任意数据类型
 	
-	COUNT
-	COUNT(*) 返回记录总数
-	COUNT(expr) 返回expr不为空总数
+		COUNT
+		COUNT(*) 返回记录总数
+		COUNT(expr) 返回expr不为空总数
 
 * 表名.列名
 	
 # MySQL常用指令
 
-	1、字符函数
+1、字符函数
+
 		concat拼接
 		substr截取子串
 		upper转换成大写
@@ -101,7 +107,8 @@
 		instr返回子串第一次出现的索引
 		length 获取字节个数
 		
-	2、数学函数
+2、数学函数
+	
 		round 四舍五入
 		rand 随机数
 		floor向下取整
@@ -109,22 +116,23 @@
 		mod取余
 		truncate截断
 
-	3、日期函数
+3、日期函数
+	
 		now当前系统日期+时间
 		curdate当前系统日期
 		curtime当前系统时间
 		str_to_date 将字符转换成日期
 		date_format将日期转换成字符
 		
-	5、其他函数
+5、其他函数
+
 		version版本
 		database当前库
 		user当前连接用户
 
-	6.查看表结构
-		desc(cribe) 表名;
-
 # MySQL条件语句
+
+### WHERE 条件语句
 
 	where 
 		条件 （>;&&;like；in（））;
@@ -134,40 +142,27 @@
 		分组字段		having 【分组后的筛选条件】
 	like
 		% 任意个字符	_一个字符
+	limit 
+		【起始的条目索引(默认0)，】条目数;
 
-	分组前筛选：	原始表		group by的前面		where
-	分组后筛选：	分组后的结果集	group by的后面		having
+* 筛选
 
-###分页
+		分组前筛选：	原始表		group by的前面		where
+		分组后筛选：	分组后的结果集	group by的后面		having
 
-	limit 【起始的条目索引，】条目数;
+* limit
 
-特点：
+		公式：select * from  表 limit （page-1）*sizePerPage,sizePerPage
+		假如:
+		每页显示条目数sizePerPage
+		要显示的页数 page
+		
+### JOIN 连接
 
-	1.起始条目索引从0开始
-	
-	2.limit子句放在查询语句的最后
-	
-	3.公式：select * from  表 limit （page-1）*sizePerPage,sizePerPage
-	假如:
-	每页显示条目数sizePerPage
-	要显示的页数 page
+	笛卡尔乘积：当查询多个表时，没有添加有效的连接条件，导致多个表所有行实现完全连接
+	select 字段1，字段2
+	from 表1，表2,...;
 
-
-limit 【offset，】size;
-注意：
-offset代表的是起始的条目索引，默认从0卡死
-size代表的是显示的条目数
-
-公式：
-假如要显示的页数为page，每一页条目数为size
-select 查询列表
-from 表
-limit (page-1)*size,size;
-
-
-
-###join
 	等值连接、非等值连接 （内连接）
 	外连接
 	交叉连接
@@ -179,56 +174,16 @@ limit (page-1)*size,size;
 	右外连接 right [outer] join on
 
 
-A： UNION 运算符
-UNION 运算符通过组合其他两个结果表（例如 TABLE1 和 TABLE2）并消去表中任何重复行而派生出一个结果表。当 ALL 随 UNION 一起使用时（即 UNION ALL），不消除重复行。两种情况下，派生表的每一行不是来自 TABLE1 就是来自 TABLE2。
+### UNION 联合
 
-三、意义
-1、将一条比较复杂的查询语句拆分成多条语句
-2、适用于查询多个表的时候，查询的列基本是一致
+	UNION 运算符通过组合其他两个结果表（例如 TABLE1 和 TABLE2）并消去表中任何重复行而派生出一个结果表。当 ALL 随 UNION 一起使用时（即 UNION ALL），不消除重复行。两种情况下，派生表的每一行不是来自 TABLE1 就是来自 TABLE2。
 
-四、特点
-1、要求多条查询语句的查询列数必须一致
-2、要求多条查询语句的查询的各列类型、顺序最好一致
-3、union 去重，union all包含重复项
-B： EXCEPT 运算符
-EXCEPT 运算符通过包括所有在 TABLE1 中但不在 TABLE2 中的行并消除所有重复行而派生出一个结果表。当 ALL 随 EXCEPT 一起使用时 (EXCEPT ALL)，不消除重复行。
-C： INTERSECT 运算符
-INTERSECT 运算符通过只包括 TABLE1 和 TABLE2 中都有的行并消除所有重复行而派生出一个结果表。当 ALL 随 INTERSECT 一起使用时 (INTERSECT ALL)，不消除重复行。
+* 意义
 
-子查询
-外面的语句可以是insert、update、delete、select等，一般select作为外面语句较多
+		1、将一条比较复杂的查询语句拆分成多条语句
+		2、适用于查询多个表的时候，查询的列基本是一致
 
-
-#MySQL数据处理
-
-##DQL语言
-
-	select 
-		要查询的字段|表达式|常量值|函数
-	from 
-		表
-
-
-
-
-当查询中涉及到了多个表的字段，需要使用多表连接
-select 字段1，字段2
-from 表1，表2,...;
-
-笛卡尔乘积：当查询多个表时，没有添加有效的连接条件，导致多个表所有行实现完全连接
-###联合查询
-
-
-引入：
-	union 联合、合并
-
-语法：
-
-	select 字段|常量|表达式|函数 【from 表】 【where 条件】 union 【all】
-	select 字段|常量|表达式|函数 【from 表】 【where 条件】 union 【all】
-	select 字段|常量|表达式|函数 【from 表】 【where 条件】 union  【all】
-	.....
-	select 字段|常量|表达式|函数 【from 表】 【where 条件】
+* 特点
 
 特点：
 
@@ -236,16 +191,32 @@ from 表1，表2,...;
 	2、多条查询语句的查询的列的类型几乎相同
 	3、union代表去重，union all代表不去重
 
+		1、要求多条查询语句的查询列数必须一致
+		2、要求多条查询语句的查询的各列类型、顺序最好一致
+		3、union 去重，union all包含重复项
+		B： EXCEPT 运算符
+		EXCEPT 运算符通过包括所有在 TABLE1 中但不在 TABLE2 中的行并消除所有重复行而派生出一个结果表。当 ALL 随 EXCEPT 一起使用时 (EXCEPT ALL)，不消除重复行。
+		C： INTERSECT 运算符
+		INTERSECT 运算符通过只包括 TABLE1 和 TABLE2 中都有的行并消除所有重复行而派生出一个结果表。当 ALL 随 INTERSECT 一起使用时 (INTERSECT ALL)，不消除重复行。
 
-##DML语言
 
-###插入
+# MySQL数据处理
 
-语法：
-	insert into 表名(字段名，...)
-	values(值1，...);
+### DQL语言
 
-insert into 表名 set 字段=值,字段=值,...;
+	select 
+		要查询的字段|表达式|常量值|函数
+	from 
+		表
+
+### DML语言
+
+* 插入
+
+		insert into 表名(字段名，...)
+		values(值1，...);
+
+		insert into 表名 set 字段=值,字段=值,...;
 
 特点：
 
@@ -255,37 +226,38 @@ insert into 表名 set 字段=值,字段=值,...;
 	4、字段个数和值的个数必须一致
 	5、字段可以省略，但默认所有字段，并且顺序和表中的存储顺序一致
 
-###修改
+* 修改
 
-修改单表语法：
+		* 修改单表语法：
 
 	update 表名 set 字段=新值,字段=新值
 	【where 条件】
-修改多表语法：
+	
+		*修改多表语法：
 
 	update 表1 别名1,表2 别名2
 	set 字段=新值，字段=新值
 	where 连接条件
 	and 筛选条件
 
-###删除
+* 删除
 
-方式1：delete语句 
+		方式1：delete语句 
 
-单表的删除： ★
-	delete from 表名 【where 筛选条件】【limit 条目数】
+		单表的删除： ★
+		delete from 表名 【where 筛选条件】【limit 条目数】
 
-多表的删除：
-	delete 别名1，别名2
-	from 表1 别名1，表2 别名2
-	where 连接条件
-	and 筛选条件;
+		多表的删除：
+		delete 别名1，别名2
+		from 表1 别名1，表2 别名2
+		where 连接条件
+		and 筛选条件;
 
 
-delete 别名1,别名2 from 表1 别名 
-inner|left|right join 表2 别名 
-on 连接条件
- 【where 筛选条件】
+		delete 别名1,别名2 from 表1 别名 
+		inner|left|right join 表2 别名 
+		on 连接条件
+		【where 筛选条件】
 
 
 
