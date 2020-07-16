@@ -34,7 +34,7 @@
 	SELECT 字段名或表达式 INTO 变量
 	FROM 表;
 
-		* 使用：
+	 * 使用：
 
 	select @变量名;
 
