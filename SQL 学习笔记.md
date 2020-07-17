@@ -62,6 +62,15 @@
 	用户变量	当前会话		 会话的任何地方	加@符号，不用指定类型
 	局部变量	定义它的BEGIN END中 	BEGIN END的第一句话	 一般不用加@,需要指定类型
 
+### 常见的约束
+
+	NOT NULL：非空，该字段的值必填
+	UNIQUE：唯一，该字段的值不可重复
+	DEFAULT：默认，该字段的值不用手动插入有默认值
+	CHECK：检查，mysql不支持
+	PRIMARY KEY：主键，该字段的值不可重复并且非空  unique+not null
+	FOREIGN KEY：外键，该字段的值引用了另外的表的字段
+	
 ### 其它
 
 * ``着重号，区分同名命令和名称
@@ -81,6 +90,9 @@
 		COUNT
 		COUNT(*) 返回记录总数
 		COUNT(expr) 返回expr不为空总数
+		
+		
+		
 	
 # MySQL常用指令
 
@@ -177,28 +189,23 @@
 		1、将一条比较复杂的查询语句拆分成多条语句
 		2、适用于查询多个表的时候，查询的列基本是一致
 
-* 特点
+### EXCEPT | INTERSECT
 
-特点：
-
-	1、多条查询语句的查询的列数必须是一致的
-	2、多条查询语句的查询的列的类型几乎相同
-	3、union代表去重，union all代表不去重
-
-		1、要求多条查询语句的查询列数必须一致
-		2、要求多条查询语句的查询的各列类型、顺序最好一致
-		3、union 去重，union all包含重复项
-		B： EXCEPT 运算符
+	（SQL查询语句1)
+		EXCEPT | INTERSECT 
+	（SQL查询语句2）
+	
+		EXCEPT 运算符
 		EXCEPT 运算符通过包括所有在 TABLE1 中但不在 TABLE2 中的行并消除所有重复行而派生出一个结果表。当 ALL 随 EXCEPT 一起使用时 (EXCEPT ALL)，不消除重复行。
-		C： INTERSECT 运算符
+		INTERSECT 运算符
 		INTERSECT 运算符通过只包括 TABLE1 和 TABLE2 中都有的行并消除所有重复行而派生出一个结果表。当 ALL 随 INTERSECT 一起使用时 (INTERSECT ALL)，不消除重复行。
-
 
 # MySQL数据处理
 
 ### DQL语句
 
 查询
+
 	select 
 		要查询的字段|表达式|常量值|函数
 	from 
@@ -209,7 +216,7 @@
 * 插入
 
 		insert into 表名(字段名，...)
-		values(值1，...);
+			values(值1，...);
 
 		insert into 表名 set 字段=值,字段=值,...;
 		
@@ -217,8 +224,10 @@
 
 		update 表1 别名1,表2 别名2
 		set 字段=新值，字段=新值
-		where 连接条件
-		and 筛选条件
+		where 
+			连接条件
+		and 
+			筛选条件
 
 * 删除
 
@@ -230,8 +239,10 @@
 		多表的删除：
 		delete 别名1，别名2
 		from 表1 别名1，表2 别名2
-		where 连接条件
-		and 筛选条件;
+		where
+			连接条件
+		and
+			筛选条件;
 
 
 		delete 别名1,别名2 from 表1 别名 
@@ -277,53 +288,41 @@
 		
 * 表的管理
 
-	#1.创建表
+1.创建表
 
-create table 【if not exists】 表名(
-	字段名 字段类型 【约束】,
-	字段名 字段类型 【约束】,
-	。。。
-	字段名 字段类型 【约束】 
-
-)
-
-	CREATE TABLE IF NOT EXISTS stuinfo(
-		stuId INT,
-		stuName VARCHAR(20),
-		gender CHAR,
-		bornDate DATETIME
-		
-	
-	);
+	create table 【if not exists】 表名(
+		字段名 字段类型 【约束】,
+		字段名 字段类型 【约束】,
+		...
+		字段名 字段类型 【约束】 
+	)
 
 	DESC studentinfo;
 
-	#2.修改表 alter
-	语法：ALTER TABLE 表名 ADD|MODIFY|DROP|CHANGE COLUMN 字段名 【字段类型】;
+2.修改表
+
+	ALTER TABLE 表名 ADD|MODIFY|DROP|CHANGE COLUMN 字段名 【字段类型】;
 	
-	#①修改字段名
-	ALTER TABLE studentinfo CHANGE  COLUMN sex gender CHAR;
-	
-	#②修改表名
+	修改表名
 	ALTER TABLE stuinfo RENAME [TO]  studentinfo;
-	#③修改字段类型和列级约束
+	
+	修改字段类型和列级约束
 	ALTER TABLE studentinfo MODIFY COLUMN borndate DATE ;
 	
-	#④添加字段
-	
+	添加字段	
 	ALTER TABLE studentinfo ADD COLUMN email VARCHAR(20) first;
-	#⑤删除字段
+	
+	删除字段
 	ALTER TABLE studentinfo DROP COLUMN email;
 	
+3.删除表
 	
-	#3.删除表
-	
-	DROP TABLE [IF EXISTS] studentinfo;
+	drop table【if exists】 表名;
 
-	7、说明：添加主键： Alter table tabname add primary key(col)
-	说明：删除主键： Alter table tabname drop primary key(col)
+4.添加/删除主键
 
-二、修改表
+	Alter table tabname add/drop primary key(col)
+
 
 1.添加列
 alter table 表名 add column 列名 类型 【first|after 字段名】;
@@ -336,8 +335,6 @@ alter table 表名 drop column 列名;
 5.修改表名
 alter table 表名 rename 【to】 新表名;
 
-三、删除表
-drop table【if exists】 表名;
 
 四、复制表
 1、复制表的结构
@@ -347,28 +344,12 @@ create table 表名
 select 查询列表 from 旧表【where 筛选】;
 
 
- 	查看当前库的所有表
-		
-		show tables;
-	查看其它库的所有表
-	
-		show tables from 库名;
-	说明：增加一个列
-	
-		Alter table tabname add column col type
 
 
 
 
 
 
-一、常见的约束
-NOT NULL：非空，该字段的值必填
-UNIQUE：唯一，该字段的值不可重复
-DEFAULT：默认，该字段的值不用手动插入有默认值
-CHECK：检查，mysql不支持
-PRIMARY KEY：主键，该字段的值不可重复并且非空  unique+not null
-FOREIGN KEY：外键，该字段的值引用了另外的表的字段
 
 外键：
 1、用于限制两个表的关系，从表的字段值引用了主表的某字段值
