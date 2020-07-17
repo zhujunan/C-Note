@@ -147,8 +147,8 @@
 
 * 筛选
 
-		分组前筛选：	原始表		group by的前面		where
-		分组后筛选：	分组后的结果集	group by的后面		having
+		分组前筛选：	原始表　	    　	group by的前面		where
+		分组后筛选：	分组后的结果集	      group by的后面             having
 
 * limit
 
@@ -176,7 +176,9 @@
 
 ### UNION 联合
 
-	UNION 运算符通过组合其他两个结果表（例如 TABLE1 和 TABLE2）并消去表中任何重复行而派生出一个结果表。当 ALL 随 UNION 一起使用时（即 UNION ALL），不消除重复行。两种情况下，派生表的每一行不是来自 TABLE1 就是来自 TABLE2。
+	UNION 运算符通过组合其他两个结果表（例如 TABLE1 和 TABLE2）并消去表中任何重复行而派生出一个结果表。
+	当 ALL 随 UNION 一起使用时（即 UNION ALL），不消除重复行。
+	两种情况下，派生表的每一行不是来自 TABLE1 就是来自 TABLE2。
 
 * 意义
 
@@ -202,14 +204,15 @@
 
 # MySQL数据处理
 
-### DQL语言
+### DQL语句
 
+查询
 	select 
 		要查询的字段|表达式|常量值|函数
 	from 
 		表
 
-### DML语言
+### DML语句
 
 * 插入
 
@@ -228,21 +231,21 @@
 
 * 修改
 
-		* 修改单表语法：
+	* 修改单表语法：
 
-	update 表名 set 字段=新值,字段=新值
-	【where 条件】
+		update 表名 set 字段=新值,字段=新值
+		【where 条件】
 	
-		*修改多表语法：
+	* 修改多表语法：
 
-	update 表1 别名1,表2 别名2
-	set 字段=新值，字段=新值
-	where 连接条件
-	and 筛选条件
+		update 表1 别名1,表2 别名2
+		set 字段=新值，字段=新值
+		where 连接条件
+		and 筛选条件
 
 * 删除
 
-		方式1：delete语句 
+	* 方式1：delete语句 
 
 		单表的删除： ★
 		delete from 表名 【where 筛选条件】【limit 条目数】
@@ -261,41 +264,38 @@
 
 
 
-方式2：truncate语句
+	* 方式2：truncate语句
 
-	truncate table 表名
+		truncate table 表名
 
 
-两种方式的区别【面试题】
+	* 两种方式的区别
 	
-	#1.truncate不能加where条件，而delete可以加where条件
+		#1.truncate不能加where条件，而delete可以加where条件
 	
-	#2.truncate的效率高一丢丢
+		#2.truncate的效率高一丢丢
 	
-	#3.truncate 删除带自增长的列的表后，如果再插入数据，数据从1开始
-	#delete 删除带自增长列的表后，如果再插入数据，数据从上一次的断点处开始
+		#3.truncate 删除带自增长的列的表后，如果再插入数据，数据从1开始
+		#delete 删除带自增长列的表后，如果再插入数据，数据从上一次的断点处开始
 	
-	#4.truncate删除不能回滚，delete删除可以回滚
+		#4.truncate删除不能回滚，delete删除可以回滚
 
 
-1.truncate删除后，如果再插入，标识列从1开始
-  delete删除后，如果再插入，标识列从断点开始
-2.delete可以添加筛选条件
- truncate不可以添加筛选条件
-3.truncate效率较高
-4.truncate没有返回值
-delete可以返回受影响的行数
-5.truncate不可以回滚
-delete可以回滚
+		1.truncate删除后，如果再插入，标识列从1开始
+		  delete删除后，如果再插入，标识列从断点开始
+		2.delete可以添加筛选条件
+ 		truncate不可以添加筛选条件
+		3.truncate效率较高
+		4.truncate没有返回值
+		delete可以返回受影响的行数
+		5.truncate不可以回滚
+		delete可以回滚
 
+### DDL语句
 
+* 库和表的管理
 
-
-##DDL语句
-
-###库和表的管理
-
-库的管理：
+	库的管理：
 
 	一、创建库
 	create database 库名
@@ -486,10 +486,7 @@ alter table 表 modify column 字段名 字段类型 约束
 
 
 
-#数据库事务(TCL语言)
-
-
-
+### TCL语句(数据库事务)
 
 一、含义
 事务：一条或多条sql语句组成一个执行单位，一组sql语句要么都执行要么都不执行
@@ -529,7 +526,7 @@ savepoint 回滚点名;
 3、如何解决并发问题
 通过设置隔离级别来解决并发问题
 4、隔离级别
-				  	        脏读	  	      不可重复读  		幻读
+		            脏读	  	 不可重复读        幻读
 read uncommitted:读未提交     ×                ×              ×        
 read committed：读已提交      √                ×              ×
 repeatable read：可重复读     √                √              ×
