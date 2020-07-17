@@ -62,18 +62,11 @@
 	用户变量	当前会话		 会话的任何地方	加@符号，不用指定类型
 	局部变量	定义它的BEGIN END中 	BEGIN END的第一句话	 一般不用加@,需要指定类型
 
-### 常见约束
-
-	NOT NULL
-	DEFAULT
-	UNIQUE
-	CHECK
-	PRIMARY KEY
-	FOREIGN KEY
-
 ### 其它
 
 * ``着重号，区分同名命令和名称
+
+* 表名.列名
 
 * 别名
 
@@ -81,14 +74,13 @@
 		(2)空格
 
 *   
+
 		AVG();SUM() 必须数值型
 		MIN();MAX() 任意数据类型
 	
 		COUNT
 		COUNT(*) 返回记录总数
 		COUNT(expr) 返回expr不为空总数
-
-* 表名.列名
 	
 # MySQL常用指令
 
@@ -220,23 +212,8 @@
 		values(值1，...);
 
 		insert into 表名 set 字段=值,字段=值,...;
-
-特点：
-
-	1、字段类型和值类型一致或兼容，而且一一对应
-	2、可以为空的字段，可以不用插入值，或用null填充
-	3、不可以为空的字段，必须插入值
-	4、字段个数和值的个数必须一致
-	5、字段可以省略，但默认所有字段，并且顺序和表中的存储顺序一致
-
+		
 * 修改
-
-	* 修改单表语法：
-
-		update 表名 set 字段=新值,字段=新值
-		【where 条件】
-	
-	* 修改多表语法：
 
 		update 表1 别名1,表2 别名2
 		set 字段=新值，字段=新值
@@ -262,67 +239,43 @@
 		on 连接条件
 		【where 筛选条件】
 
-
-
-	* 方式2：truncate语句
+	* 方式2：truncate语句(DLL语句)
 
 		truncate table 表名
 
-
 	* 两种方式的区别
-	
-		#1.truncate不能加where条件，而delete可以加where条件
-	
-		#2.truncate的效率高一丢丢
-	
-		#3.truncate 删除带自增长的列的表后，如果再插入数据，数据从1开始
-		#delete 删除带自增长列的表后，如果再插入数据，数据从上一次的断点处开始
-	
-		#4.truncate删除不能回滚，delete删除可以回滚
-
-
-		1.truncate删除后，如果再插入，标识列从1开始
-		  delete删除后，如果再插入，标识列从断点开始
-		2.delete可以添加筛选条件
- 		truncate不可以添加筛选条件
-		3.truncate效率较高
+		
+		1.truncate删除带自增长的列的表后，如果再插入，标识列从1开始
+		  delete删除带自增长列的表后，如果再插入，标识列从断点开始
+		2.truncate不可以添加筛选条件
+		  delete可以添加筛选条件
+		3.truncate只能对表
+		  delete可以是表和视图
 		4.truncate没有返回值
-		delete可以返回受影响的行数
+		  delete可以返回受影响的行数
 		5.truncate不可以回滚
-		delete可以回滚
+		  delete可以回滚
+		6.当表被truncate后，这个表和索引所占用的空间会恢复到初始大小，
+		  delete操作不会减少表或索引所占用的空间。
 
 ### DDL语句
 
-* 库和表的管理
+* 库的管理
 
-	库的管理：
-
-	一、创建库
-	create database 库名
-	二、删除库
-	drop database 库名
-	1.查看当前所有的数据库<br>
-	show databases;
-	2.打开指定的库
-	use 库名
-	3.查看当前库的所有表
-	show tables;
-	4.查看其它库的所有表
-	show tables from 库名;
-
-表的管理：
-
- 
-	6、说明：增加一个列
-	Alter table tabname add column col type
-
-
-8、说明：创建索引：create [unique] index idxname on tabname(col….)
-删除索引：drop index idxname
-注：索引是不可更改的，想更改必须删除重新建。
-9、说明：创建视图：create view viewname as select statement
-删除视图：drop view viewname
-
+	创建库
+		
+		create database 库名
+	删除库
+	
+		drop database 库名
+	查看当前所有的数据库
+	
+		show databases;
+	打开指定的库
+	
+		use 库名
+		
+* 表的管理
 
 	#1.创建表
 
@@ -392,6 +345,21 @@ create table 表名 like 旧表;
 2、复制表的结构+数据
 create table 表名 
 select 查询列表 from 旧表【where 筛选】;
+
+
+ 	查看当前库的所有表
+		
+		show tables;
+	查看其它库的所有表
+	
+		show tables from 库名;
+	说明：增加一个列
+	
+		Alter table tabname add column col type
+
+
+
+
 
 
 一、常见的约束
@@ -484,6 +452,11 @@ alter table 表 modify column 字段名 字段类型 约束
 
 
 
+8、说明：创建索引：create [unique] index idxname on tabname(col….)
+删除索引：drop index idxname
+注：索引是不可更改的，想更改必须删除重新建。
+9、说明：创建视图：create view viewname as select statement
+删除视图：drop view viewname
 
 
 ### TCL语句(数据库事务)
