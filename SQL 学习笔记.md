@@ -335,20 +335,15 @@
 
 
 
+* 外键：
 
-
-外键：
-1、用于限制两个表的关系，从表的字段值引用了主表的某字段值
-2、外键列和主表的被引用列要求类型一致，意义一样，名称无要求
-3、主表的被引用列要求是一个key（一般就是主键）
-4、插入数据，先插入主表
-删除数据，先删除从表
 可以通过以下两种方式来删除主表的记录
-#方式一：级联删除
-ALTER TABLE stuinfo ADD CONSTRAINT fk_stu_major FOREIGN KEY(majorid) REFERENCES major(id) ON DELETE CASCADE;
+	
+	方式一：级联删除
+	ALTER TABLE stuinfo ADD CONSTRAINT fk_stu_major FOREIGN KEY(majorid) REFERENCES major(id) ON DELETE CASCADE;
 
-#方式二：级联置空
-ALTER TABLE stuinfo ADD CONSTRAINT fk_stu_major FOREIGN KEY(majorid) REFERENCES major(id) ON DELETE SET NULL;
+	方式二：级联置空
+	ALTER TABLE stuinfo ADD CONSTRAINT fk_stu_major FOREIGN KEY(majorid) REFERENCES major(id) ON DELETE SET NULL;
 
 二、创建表时添加约束
 create table 表名(
