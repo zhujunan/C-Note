@@ -301,20 +301,21 @@
 
 2.修改表
 
-	ALTER TABLE 表名 ADD|MODIFY|DROP|CHANGE COLUMN 字段名 【字段类型】;
+	添加列
+	alter table 表名 add column 列名 类型 【first|after 字段名】;
+	
+	修改列的类型或约束
+	alter table 表名 modify column 列名 新类型 【新约束】;
+
+	修改列名
+	alter table 表名 change column 旧列名 新列名 类型;
+	
+	删除列
+	alter table 表名 drop column 列名;
 	
 	修改表名
-	ALTER TABLE stuinfo RENAME [TO]  studentinfo;
-	
-	修改字段类型和列级约束
-	ALTER TABLE studentinfo MODIFY COLUMN borndate DATE ;
-	
-	添加字段	
-	ALTER TABLE studentinfo ADD COLUMN email VARCHAR(20) first;
-	
-	删除字段
-	ALTER TABLE studentinfo DROP COLUMN email;
-	
+	alter table 表名 rename 【to】 新表名;
+		
 3.删除表
 	
 	drop table【if exists】 表名;
@@ -323,29 +324,14 @@
 
 	Alter table tabname add/drop primary key(col)
 
+5.复制表
 
-1.添加列
-alter table 表名 add column 列名 类型 【first|after 字段名】;
-2.修改列的类型或约束
-alter table 表名 modify column 列名 新类型 【新约束】;
-3.修改列名
-alter table 表名 change column 旧列名 新列名 类型;
-4 .删除列
-alter table 表名 drop column 列名;
-5.修改表名
-alter table 表名 rename 【to】 新表名;
-
-
-四、复制表
-1、复制表的结构
-create table 表名 like 旧表;
-2、复制表的结构+数据
-create table 表名 
-select 查询列表 from 旧表【where 筛选】;
-
-
-
-
+	复制表的结构
+	create table 表名 like 旧表;
+	
+	复制表的结构+数据
+	create table 表名 
+	select 查询列表 from 旧表【where 筛选】;
 
 
 
