@@ -58,9 +58,12 @@
 
 三、二者的区别：
 
-		   作用域		     定义位置	       语法
-	用户变量	当前会话		 会话的任何地方	加@符号，不用指定类型
-	局部变量	定义它的BEGIN END中 	BEGIN END的第一句话	 一般不用加@,需要指定类型
+	1.用户变量 作用域是当前会话
+	  局部变量 作用域是定义它的BEGIN END中
+	2.用户变量 定义位置是会话的任何地方
+	  局部变量 定义位置是BEGIN END的第一句话
+	3.用户变量 加@符号，不用指定类型
+	  局部变量 一般不用加@,需要指定类型
 
 ### 常见的约束
 
@@ -276,12 +279,15 @@
 	创建库
 		
 		create database 库名
+		
 	删除库
 	
 		drop database 库名
+		
 	查看当前所有的数据库
 	
 		show databases;
+		
 	打开指定的库
 	
 		use 库名
@@ -333,83 +339,75 @@
 	create table 表名 
 	select 查询列表 from 旧表【where 筛选】;
 
+6.约束
 
+	create table 表名(
+		字段名 字段类型 not null,     #非空
+		字段名 字段类型 primary key,  #主键
+		字段名 字段类型 unique,       #唯一
+		字段名 字段类型 default 值,   #默认
+		constraint 约束名 foreign key(字段名) references 主表（被引用列）
+		)
 
-* 外键：
-
-可以通过以下两种方式来删除主表的记录
+	修改表时添加或删除约束:
 	
-	方式一：级联删除
-	ALTER TABLE stuinfo ADD CONSTRAINT fk_stu_major FOREIGN KEY(majorid) REFERENCES major(id) ON DELETE CASCADE;
+		1、非空
+		添加非空
+		alter table 表名 modify column 字段名 字段类型 not null;
+		删除非空
+		alter table 表名 modify column 字段名 字段类型 ;
 
-	方式二：级联置空
-	ALTER TABLE stuinfo ADD CONSTRAINT fk_stu_major FOREIGN KEY(majorid) REFERENCES major(id) ON DELETE SET NULL;
+		2、默认
+		添加默认
+		alter table 表名 modify column 字段名 字段类型 default 值;
+		删除默认
+		alter table 表名 modify column 字段名 字段类型 ;
 
-二、创建表时添加约束
-create table 表名(
-	字段名 字段类型 not null,#非空
-	字段名 字段类型 primary key,#主键
-	字段名 字段类型 unique,#唯一
-	字段名 字段类型 default 值,#默认
-	constraint 约束名 foreign key(字段名) references 主表（被引用列）
+		3、主键
+		添加主键
+		alter table 表名 add【 constraint 约束名】 primary key(字段名);
+		删除主键
+		alter table 表名 drop primary key;
 
-)
-注意：
-			支持类型		可以起约束名			
-列级约束		除了外键		不可以
-表级约束		除了非空和默认	可以，但对主键无效
+		4、唯一
+		添加唯一
+		alter table 表名 add【 constraint 约束名】 unique(字段名);
+		删除唯一
+		alter table 表名 drop index 索引名;
 
-列级约束可以在一个字段上追加多个，中间用空格隔开，没有顺序要求
+		5、外键
+		添加外键
+		alter table 表名 add【 constraint 约束名】 foreign key(字段名) references 主表（被引用列）;
+		删除外键
+		alter table 表名 drop foreign key 约束名;
 
-三、修改表时添加或删除约束
-1、非空
-添加非空
-alter table 表名 modify column 字段名 字段类型 not null;
-删除非空
-alter table 表名 modify column 字段名 字段类型 ;
+		可以通过以下两种方式来删除主表的记录
+	
+		方式一：级联删除
+		ALTER TABLE stuinfo ADD CONSTRAINT fk_stu_major FOREIGN KEY(majorid) REFERENCES major(id) ON DELETE CASCADE;
 
-2、默认
-添加默认
-alter table 表名 modify column 字段名 字段类型 default 值;
-删除默认
-alter table 表名 modify column 字段名 字段类型 ;
-3、主键
-添加主键
-alter table 表名 add【 constraint 约束名】 primary key(字段名);
-删除主键
-alter table 表名 drop primary key;
+		方式二：级联置空
+		ALTER TABLE stuinfo ADD CONSTRAINT fk_stu_major FOREIGN KEY(majorid) REFERENCES major(id) ON DELETE SET NULL;
 
-4、唯一
-添加唯一
-alter table 表名 add【 constraint 约束名】 unique(字段名);
-删除唯一
-alter table 表名 drop index 索引名;
-5、外键
-添加外键
-alter table 表名 add【 constraint 约束名】 foreign key(字段名) references 主表（被引用列）;
-删除外键
-alter table 表名 drop foreign key 约束名;
+		6.自增长列
+		特点：
+		1、不用手动插入值，可以自动提供序列值，默认从1开始，步长为1
+		auto_increment_increment
+		如果要更改起始值：手动插入值
+		如果要更改步长：更改系统变量
+		set auto_increment_increment=值;
+		2、一个表至多有一个自增长列
+		3、自增长列只能支持数值型
+		4、自增长列必须为一个key
 
-
-四、自增长列
-特点：
-1、不用手动插入值，可以自动提供序列值，默认从1开始，步长为1
-auto_increment_increment
-如果要更改起始值：手动插入值
-如果要更改步长：更改系统变量
-set auto_increment_increment=值;
-2、一个表至多有一个自增长列
-3、自增长列只能支持数值型
-4、自增长列必须为一个key
-
-一、创建表时设置自增长列
-create table 表(
-	字段名 字段类型 约束 auto_increment
-)
-二、修改表时设置自增长列
-alter table 表 modify column 字段名 字段类型 约束 auto_increment
-三、删除自增长列
-alter table 表 modify column 字段名 字段类型 约束 
+		一、创建表时设置自增长列
+		create table 表(
+			字段名 字段类型 约束 auto_increment
+		)
+		二、修改表时设置自增长列
+		alter table 表 modify column 字段名 字段类型 约束 auto_increment
+		三、删除自增长列
+		alter table 表 modify column 字段名 字段类型 约束 
 
 
 
