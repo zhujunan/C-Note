@@ -233,10 +233,10 @@ q|退出top
 
 ### 7.1 基本语法
 
-> netstat [选项]
->
-> * -an：按一定顺序排列输出
-> * -p：显示哪个进程在调用
+netstat [选项]
+
+         -an：按一定顺序排列输出
+         -p：显示哪个进程在调用
 
 ### 7.2 应用案例
 
@@ -251,8 +251,8 @@ q|退出top
 
 ## 1. RPM包
 
-> RPM：RedHat Package Manager，红帽软件包管理工具。
-> Linuxd分发版本都有采用（suse,redhat，centos等）
+RPM：RedHat Package Manager，红帽软件包管理工具。
+Linuxd分发版本都有采用（suse,redhat，centos等）
 
 ### 1.1 rpm指令
 
@@ -260,8 +260,7 @@ q|退出top
 
 * RPM查询已安装的rpm列表：rpm -qa | grep xx
   * 查看是否安装firefox：rpm -qa |grep firefox
-  ![3.11rpm查询结果.jpg](../imgs/3/3.11rpm查询结果.jpg)
-  * 如果是i686,i386表示32位系统，noarch表示通用
+
 * rpm -qa：查询所安装的所有rpm软件包
 * rpm -qa | more
 * rpm -qa | grep xx
@@ -285,8 +284,8 @@ q|退出top
 
 ## 2. YUM
 
-> yum（ Yellow dog Updater, Modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器。
->基於RPM包管理，能够从指定的服务器自动下载RPM包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软体包，无须繁琐地一次次下载、安装。
+yum（ Yellow dog Updater, Modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器。
+基於RPM包管理，能够从指定的服务器自动下载RPM包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软体包，无须繁琐地一次次下载、安装。
 
 * yum list | grep xx：查询yum服务器是否有需要安装的软件
 * yum install xx：安装指定的yum包
@@ -335,9 +334,6 @@ q|退出top
 * q无修改直接退出
 * q!不保存修改直接退出
 
-### 2.4 三种模式转换示意图
-
-![3.2vim模式转换.jpg](../imgs/3/3.2vim模式转换.jpg)
 
 ## 3. Vim 的常见指令案例
 
@@ -523,9 +519,6 @@ perl程序中#开始的行为注释，所以要注释某些行，只需在行首
 * :syntax case match 大小写敏感，int和Int将视为不同的语法元素
 * :syntax case ignore 大小写无关，int和Int将视为相同的语法元素，并使用同样的配色方案
 
-## 5. Vim拓展教程
-
-[菜鸟教程vim链接](https://www.runoob.com/linux/linux-vim.html)
 
 # 关机、重启和用户登录注销
 
