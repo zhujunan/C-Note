@@ -154,26 +154,22 @@ CMD|启动所用的命令和参数
 
 ## 5. 服务(Service)管理
 
-> 服务(Service)本质就是进程，但是是运行在后台的，通常都会监听某个端口，等待其它程序的请求，比如(mysql,sshd 防火墙等),因此我们又称为守护进程。
-
-![3.10服务说明](../imgs/3/3.10服务说明.jpg)
+服务(Service)本质就是进程，但是是运行在后台的，通常都会监听某个端口，等待其它程序的请求，比如(mysql,sshd 防火墙等),因此我们又称为守护进程。
 
 ### 5.1 service管理指令
 
-> service管理指令：service 服务名 [start | stop | restart | reload | status]
-> 在CentOS7.0之后，不再使用service，而是systemctl
+service管理指令：service 服务名 [start | stop | restart | reload | status]  
+在CentOS7.0之后，不再使用service，而是systemctl
 
 * 查看防火墙情况：
   * service iptables status
   * systemctl status firewalld（7.0之后的版本）
-![3.10打开关闭防火墙.jpg](../imgs/3/3.10打开关闭防火墙.jpg)
 
 * 测试某个端口是否在监听：telnet
 
 ### 5.2 服务查看方式
 
 * 方式1：setup指令
-![3.10查看系统服务.jpg](../imgs/3/3.10查看系统服务.jpg)
 * 方式2：ls -l /etc/init.d/
 
 ### 5.3 服务的运行级别（runlevel）
@@ -184,31 +180,31 @@ CMD|启动所用的命令和参数
 
 ### 5.4 开机流程
 
-![3.10开机流程](../imgs/3/3.10开机流程.png)
+操作系统--/boot--init进程--运行级别--/etc/init.d
 
 ### 5.5 chkconfig指令
 
-> chkconfig：可以给每个服务的各个运行级别设置自启动/关闭
+chkconfig：可以给每个服务的各个运行级别设置自启动/关闭
 
 #### 5.5.1 基本语法
 
-* 查看xxx服务：chkconfig –list | grep xxx
-* 查看服务的状态：chkconfig 服务名 --list
-* 给服务的运行级别设置自启动：chkconfig –level 5 服务名 on/off
-* 要所有运行级别关闭或开启：chkconfig 服务名 on/off
-* **chkconfig重新设置后需要重新启动才能生效**
+        查看xxx服务：chkconfig –list | grep xxx
+        查看服务的状态：chkconfig 服务名 --list
+        给服务的运行级别设置自启动：chkconfig –level 5 服务名 on/off
+        要所有运行级别关闭或开启：chkconfig 服务名 on/off
+        **chkconfig重新设置后需要重新启动才能生效**
 
 ## 6. 动态监控进程
 
-> top与ps相似，都是用来显示正在执行的进程，top的不同之处在于top执行一段时间可以更新正在运行的进程
+top与ps相似，都是用来显示正在执行的进程，top的不同之处在于top执行一段时间可以更新正在运行的进程
 
 ### 6.1 基本语法
 
-> top [选项]
->
->* -d 秒数：指定top命令每隔几秒更新。默认是3秒。
->* -i：使top不显示任何闲置或者僵死进程。
->* -p：通过指定监控进程ID来仅仅监控某个进程的状态。
+* top [选项]
+
+        -d 秒数：指定top命令每隔几秒更新。默认是3秒。
+        -i：使top不显示任何闲置或者僵死进程。
+        -p：通过指定监控进程ID来仅仅监控某个进程的状态。
 
 * 交互操作说明：
 
@@ -219,9 +215,6 @@ M|以内存的使用率排序
 N|以PID排序
 q|退出top
 
->动态进程监控图例
-
-![3.10动态进程监控图例](../imgs/3/3.10动态进程监控图例.jpg)
 
 ### 6.2 应用案例
 
