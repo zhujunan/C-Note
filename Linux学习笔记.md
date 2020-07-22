@@ -25,31 +25,24 @@
 
 [包管理工具(RPM和YUM)](#包管理工具)
 
-拓展篇
 
-* 这部分内容主要是实践操作，根据官方文档操作试着操作吧
+Shell编程篇
 
-[搭建JAVAEE环境](#搭建JAVAEE环境.md)
+[Shell基础](#Shell简介)
 
-[开发平台Ubuntu](#开发平台Ubuntu.md)
+[Shell变量](#Shell变量)
 
-5. Shell编程篇
-
-[Shell基础](#Shell简介.md)
-
-[Shell变量](#Shell变量.md)
-
-[Shell字符串](#Shell字符串.md)
+[Shell字符串](#Shell字符串)
 
 [Shell数组](#Shell数组)
 
-[Shell运算符](#Shell运算符.md)
+[Shell运算符](#Shell运算符)
 
-[Shell打印输出指令](#Shell打印输出命令.md)
+[Shell打印输出指令](#Shell打印输出命令)
 
-[Shell test命令](#Shelltest命令.md)
+[Shell test命令](#Shelltest命令)
 
-[Shell流程控制](#Shell流程控制.md)
+[Shell流程控制](#Shell流程控制)
 
 [Shell函数](#Shell函数)
 
