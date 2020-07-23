@@ -48,7 +48,7 @@ Shell编程篇
 
 [输入输出重定向](#输入输出重定向)
 
-[shell文件包含](#shell文件包含)
+[shell文件包含](#Shell文件包含)
 
 
 
@@ -1119,14 +1119,12 @@ yum（ Yellow dog Updater, Modified）是一个在Fedora和RedHat以及SUSE中�
 
 ## 1.1 什么是shell
 
-> Shell是一个命令行解释器，它为用户提供了一个向Linux内核发送请求以便裕兴程序的界面系统级程序，用户可以用Shell来启动、挂起、停止甚至是编写一些程序。
-
-![5.1shell原理.jpg](../imgs/5/5.1shell原理.jpg)
+Shell是一个命令行解释器，它为用户提供了一个向Linux内核发送请求以便裕兴程序的界面系统级程序，用户可以用Shell来启动、挂起、停止甚至是编写一些程序。
 
 ### 1.2 shell脚本
 
-> Shell 脚本（shell script），是一种为 shell 编写的脚本程序。
-> 业界所说的 shell 通常都是指 shell 脚本，但读者朋友要知道，shell 和 shell script 是两个不同的概念。
+Shell 脚本（shell script），是一种为 shell 编写的脚本程序。  
+业界所说的 shell 通常都是指 shell 脚本，但读者朋友要知道，shell 和 shell script 是两个不同的概念。
 
 ### 1.3 Shell 环境
 
