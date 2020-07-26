@@ -199,9 +199,11 @@
 	（SQL查询语句2）
 	
 		EXCEPT 运算符
-		EXCEPT 运算符通过包括所有在 TABLE1 中但不在 TABLE2 中的行并消除所有重复行而派生出一个结果表。当 ALL 随 EXCEPT 一起使用时 (EXCEPT ALL)，不消除重复行。
+		EXCEPT 运算符通过包括所有在 TABLE1 中但不在 TABLE2 中的行并消除所有重复行而派生出一个结果表。
+		当 ALL 随 EXCEPT 一起使用时 (EXCEPT ALL)，不消除重复行。
 		INTERSECT 运算符
-		INTERSECT 运算符通过只包括 TABLE1 和 TABLE2 中都有的行并消除所有重复行而派生出一个结果表。当 ALL 随 INTERSECT 一起使用时 (INTERSECT ALL)，不消除重复行。
+		INTERSECT 运算符通过只包括 TABLE1 和 TABLE2 中都有的行并消除所有重复行而派生出一个结果表。
+		当 ALL 随 INTERSECT 一起使用时 (INTERSECT ALL)，不消除重复行。
 
 # MySQL数据处理
 
