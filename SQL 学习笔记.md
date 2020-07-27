@@ -386,10 +386,10 @@
 		可以通过以下两种方式来删除主表的记录
 	
 		方式一：级联删除
-		ALTER TABLE stuinfo ADD CONSTRAINT fk_stu_major FOREIGN KEY(majorid) REFERENCES major(id) ON DELETE CASCADE;
+		ALTER TABLE 表名 ADD CONSTRAINT 约束名 FOREIGN KEY(字段名) REFERENCES 主表(被引用列) ON DELETE CASCADE;
 
 		方式二：级联置空
-		ALTER TABLE stuinfo ADD CONSTRAINT fk_stu_major FOREIGN KEY(majorid) REFERENCES major(id) ON DELETE SET NULL;
+		ALTER TABLE 表名 ADD CONSTRAINT 约束名 FOREIGN KEY(字段名) REFERENCES 主表(被引用列) ON DELETE SET NULL;
 
 		6.自增长列
 		特点：
