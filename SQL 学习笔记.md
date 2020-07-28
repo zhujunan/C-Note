@@ -64,6 +64,80 @@
 	  局部变量 定义位置是BEGIN END的第一句话
 	3.用户变量 加@符号，不用指定类型
 	  局部变量 一般不用加@,需要指定类型
+	  
+	  
+	  
+	  #变量
+一、全局变量
+
+作用域：针对于所有会话（连接）有效，但不能跨重启
+
+	查看所有全局变量
+	SHOW GLOBAL VARIABLES;
+	查看满足条件的部分系统变量
+	SHOW GLOBAL VARIABLES LIKE '%char%';
+	查看指定的系统变量的值
+	SELECT @@global.autocommit;
+	为某个系统变量赋值
+	SET @@global.autocommit=0;
+	SET GLOBAL autocommit=0;
+
+二、会话变量
+
+作用域：针对于当前会话（连接）有效
+
+	查看所有会话变量
+	SHOW SESSION VARIABLES;
+	查看满足条件的部分会话变量
+	SHOW SESSION VARIABLES LIKE '%char%';
+	查看指定的会话变量的值
+	SELECT @@autocommit;
+	SELECT @@session.tx_isolation;
+	为某个会话变量赋值
+	SET @@session.tx_isolation='read-uncommitted';
+	SET SESSION tx_isolation='read-committed';
+
+
+二、自定义变量
+说明：
+1、用户变量
+作用域：针对于当前连接（会话）生效
+位置：begin end里面，也可以放在外面
+使用：
+
+①声明并赋值：
+set @变量名=值;或
+set @变量名:=值;或
+select @变量名:=值;
+
+②更新值
+方式一：
+	set @变量名=值;或
+	set @变量名:=值;或
+	select @变量名:=值;
+方式二：
+	select xx into @变量名 from 表;
+
+③使用
+select @变量名;
+
+
+
+2、局部变量
+作用域：仅仅在定义它的begin end中有效
+位置：只能放在begin end中，而且只能放在第一句
+使用：
+①声明
+declare 变量名 类型 【default 值】;
+②赋值或更新
+方式一：
+	set 变量名=值;或
+	set 变量名:=值;或
+	select @变量名:=值;
+方式二：
+	select xx into 变量名 from 表;
+③使用
+select 变量名;
 
 ### 常见的约束
 
@@ -500,7 +574,7 @@
 
 # 其它
 
-## 视图
+### 视图
 
 含义：一张虚拟的表
 
@@ -514,86 +588,54 @@
 	create view 视图名
 		as
 
-###视图的增删改查
+视图的增删改查
 
-	1、查看视图的数据 ★
-	
-	SELECT * FROM my_v4;
-	SELECT * FROM my_v1 WHERE last_name='Partners';
-	
-	2、插入视图的数据
-	INSERT INTO my_v4(last_name,department_id) VALUES('虚竹',90);
-	
-	3、修改视图的数据
-	
-	UPDATE my_v4 SET last_name ='梦姑' WHERE last_name='虚竹';	
-	
-	4、删除视图的数据
-	DELETE FROM my_v4;
+视图的修改
 
-三、修改
-方式一：
-create or replace view 视图名
-as
-查询语句;
-方式二：
-alter view 视图名
-as
-查询语句
+	方式一：
+	create or replace view 视图名
+	as
+	查询语句;
+	方式二：
+	alter view 视图名
+	as
+	查询语句
 
-四、删除
-drop view 视图1，视图2,...;
-五、查看
-desc 视图名;
-show create view 视图名;
-六、使用
-1.插入
-insert
-2.修改
-update
-3.删除
-delete
-4.查看
-select
-注意：视图一般用于查询的，而不是更新的，所以具备以下特点的视图都不允许更新
-①包含分组函数、group by、distinct、having、union、
-②join
-③常量视图
-④where后的子查询用到了from中的表
-⑤用到了不可更新的视图
+视图的删除
 
+	drop view 视图1，视图2,...;
 
-###某些视图不能更新
-	包含以下关键字的sql语句：分组函数、distinct、group  by、having、union或者union all
-	常量视图
-	Select中包含子查询
+视图的查看
+
+	desc 视图名;
+	show create view 视图名;
+
+视图的使用
+
+	1.插入
+	insert
+	2.修改
+	update
+	3.删除
+	delete
+	4.查看
+	select
+
+不能更新的视图
+
+	视图一般用于查询的，而不是更新的，所以具备以下特点的视图都不允许更新
+	包含分组函数、group by、distinct、having、union、
 	join
-	from一个不能更新的视图
-	where子句的子查询引用了from子句中的表
-###视图逻辑的更新
-	#方式一：
-	CREATE OR REPLACE VIEW test_v7
-	AS
-	SELECT last_name FROM employees
-	WHERE employee_id>100;
-	
-	#方式二:
-	ALTER VIEW test_v7
-	AS
-	SELECT employee_id FROM employees;
-	
-	SELECT * FROM test_v7;
-###视图的删除
-	DROP VIEW test_v1,test_v2,test_v3;
-###视图结构的查看	
-	DESC test_v7;
-	SHOW CREATE VIEW test_v7;
+	常量视图
+	where后的子查询用到了from中的表
+	Select中包含子查询
+	用到了（from）不可更新的视图
 
 
+### 存储过程
 
-#存储过程
+含义：一组经过预先编译的sql语句的集合  
 
-含义：一组经过预先编译的sql语句的集合
 好处：
 
 	1、提高了sql语句的重用性，减少了开发程序员的压力
@@ -602,19 +644,19 @@ select
 
 分类：
 
+	参数模式：in、out、inout，其中in可以省略
 	1、无返回无参
 	2、仅仅带in类型，无返回有参
 	3、仅仅带out类型，有返回无参
 	4、既带in又带out，有返回有参
 	5、带inout，有返回有参
 	注意：in、out、inout都可以在一个存储过程中带多个
-###创建存储过程
-语法：
 
-	create procedure 存储过程名(in|out|inout 参数名  参数类型,...)
+创建存储过程  
+
+	create procedure 存储过程名(参数模式 参数名 参数类型)
 	begin
 		存储过程体
-
 	end
 
 类似于方法：
@@ -646,159 +688,62 @@ select
 	inout：既能做输入又能做输出
 
 
-#调用存储过程
+调用存储过程
+
 	call 存储过程名(实参列表)
+	举例：
+	调用in模式的参数：call sp1（‘值’）;
+	调用out模式的参数：set @name; call sp1(@name);select @name;
+	调用inout模式的参数：set @name=值; call sp1(@name); select @name;
 
+查看
 
-一、创建 ★
-create procedure 存储过程名(参数模式 参数名 参数类型)
-begin
-		存储过程体
-end
-注意：
-1.参数模式：in、out、inout，其中in可以省略
-2.存储过程体的每一条sql语句都需要用分号结尾
+	show create procedure 存储过程名;
 
-二、调用
-call 存储过程名(实参列表)
-举例：
-调用in模式的参数：call sp1（‘值’）;
-调用out模式的参数：set @name; call sp1(@name);select @name;
-调用inout模式的参数：set @name=值; call sp1(@name); select @name;
-三、查看
-show create procedure 存储过程名;
-四、删除
-drop procedure 存储过程名;
-
-
-
-#变量
-一、全局变量
-
-作用域：针对于所有会话（连接）有效，但不能跨重启
-
-	查看所有全局变量
-	SHOW GLOBAL VARIABLES;
-	查看满足条件的部分系统变量
-	SHOW GLOBAL VARIABLES LIKE '%char%';
-	查看指定的系统变量的值
-	SELECT @@global.autocommit;
-	为某个系统变量赋值
-	SET @@global.autocommit=0;
-	SET GLOBAL autocommit=0;
-
-二、会话变量
-
-作用域：针对于当前会话（连接）有效
-
-	查看所有会话变量
-	SHOW SESSION VARIABLES;
-	查看满足条件的部分会话变量
-	SHOW SESSION VARIABLES LIKE '%char%';
-	查看指定的会话变量的值
-	SELECT @@autocommit;
-	SELECT @@session.tx_isolation;
-	为某个会话变量赋值
-	SET @@session.tx_isolation='read-uncommitted';
-	SET SESSION tx_isolation='read-committed';
-
-
-二、自定义变量
-说明：
-1、用户变量
-作用域：针对于当前连接（会话）生效
-位置：begin end里面，也可以放在外面
-使用：
-
-①声明并赋值：
-set @变量名=值;或
-set @变量名:=值;或
-select @变量名:=值;
-
-②更新值
-方式一：
-	set @变量名=值;或
-	set @变量名:=值;或
-	select @变量名:=值;
-方式二：
-	select xx into @变量名 from 表;
-
-③使用
-select @变量名;
-
-
-
-2、局部变量
-作用域：仅仅在定义它的begin end中有效
-位置：只能放在begin end中，而且只能放在第一句
-使用：
-①声明
-declare 变量名 类型 【default 值】;
-②赋值或更新
-方式一：
-	set 变量名=值;或
-	set 变量名:=值;或
-	select @变量名:=值;
-方式二：
-	select xx into 变量名 from 表;
-③使用
-select 变量名;
-
-
-
-#函数
-
-###创建函数
-
-一、创建
-create function 函数名(参数名 参数类型) returns  返回类型
-begin
-	函数体
-end
-
-注意：函数体中肯定需要有return语句
-二、调用
-select 函数名(实参列表);
-三、查看
-show create function 函数名;
-四、删除
-drop function 函数名；
-
-
-
-学过的函数：LENGTH、SUBSTR、CONCAT等
-语法：
-
-	CREATE FUNCTION 函数名(参数名 参数类型,...) RETURNS 返回类型
-	BEGIN
-		函数体
+删除
 	
-	END
-
-###调用函数
-	SELECT 函数名（实参列表）
+	drop procedure 存储过程名;
 
 
-###函数和存储过程的区别
+### 函数
+
+创建函数
+
+	create function 函数名(参数名 参数类型) returns  返回类型
+	begin
+		函数体
+	end
+
+	注意：函数体中肯定需要有return语句
+
+调用
+
+	select 函数名(实参列表);
+
+查看
+	
+	show create function 函数名;
+
+删除
+	
+	drop function 函数名；
+
+函数和存储过程的区别
 
 			关键字		调用语法	返回值			应用场景
 	函数		FUNCTION	SELECT 函数()	只能是一个		一般用于查询结果为一个值并返回时，当有返回值而且仅仅一个
 	存储过程	PROCEDURE	CALL 存储过程()	可以有0个或多个		一般用于更新
 
 
+### 流程控制结构
 
-#流程控制结构
+分支结构
 
-###分支结构
-特点：
-1、if函数
-功能：实现简单双分支
 语法：
 if(条件，值1，值2)
-位置：
-可以作为表达式放在任何位置
+
 2、case结构
-功能：实现多分支
+
 语法1：
 case 表达式或字段
 when 值1 then 语句1;
@@ -815,11 +760,9 @@ when 条件2 then 语句2；
 else 语句n;
 end [case];
 
-
-位置：
-可以放在任何位置，
 如果放在begin end 外面，作为表达式结合着其他语句使用
 如果放在begin end 里面，一般作为独立的语句使用
+
 3、if结构
 功能：实现多分支
 语法：
@@ -832,7 +775,8 @@ end if;
 只能放在begin end中
 
 
-###循环结构
+循环结构
+
 位置：
 只能放在begin end中
 
@@ -871,6 +815,7 @@ iterate：类似于continue，用于结束本次循环，继续下一次
 
 ###分支
 一、if函数
+
 	语法：if(条件，值1，值2)
 	特点：可以用在任何位置
 
