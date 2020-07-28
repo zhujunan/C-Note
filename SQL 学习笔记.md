@@ -11,7 +11,7 @@
 >[DDL语句](#DDL语句)  
 >[TCL语句(数据库事务)](#TCL语句(数据库事务))  
 
-[其它](#其它.)
+[其它](#其它)
 >[视图](#视图)  
 >[存储过程](#存储过程)  
 >[函数](#函数)  
@@ -21,9 +21,39 @@
 
 # MySQL基本概念
 
-### 定义变量
+### 变量
 
-一、用户变量  
+一、全局变量  
+
+作用域：针对于所有会话（连接）有效，但不能跨重启
+
+	查看所有全局变量
+	SHOW GLOBAL VARIABLES;
+	查看满足条件的部分系统变量
+	SHOW GLOBAL VARIABLES LIKE '%char%';
+	查看指定的系统变量的值
+	SELECT @@global.autocommit;
+	为某个系统变量赋值
+	SET @@global.autocommit=0;
+	SET GLOBAL autocommit=0;
+
+二、会话变量  
+
+作用域：针对于当前会话（连接）有效
+
+	查看所有会话变量
+	SHOW SESSION VARIABLES;
+	查看满足条件的部分会话变量
+	SHOW SESSION VARIABLES LIKE '%char%';
+	查看指定的会话变量的值
+	SELECT @@autocommit;
+	SELECT @@session.tx_isolation;
+	为某个会话变量赋值
+	SET @@session.tx_isolation='read-uncommitted';
+	SET SESSION tx_isolation='read-committed';
+
+三、用户变量  
+
 * 声明并初始化:	
 		
 		SET @变量名=值;
@@ -44,7 +74,8 @@
 
 		select @变量名;
 
-二、局部变量  
+二、局部变量   
+
 * 声明：
 	
 		declare 变量名 类型 【default 值】;
@@ -72,80 +103,7 @@
 	  局部变量 定义位置是BEGIN END的第一句话
 	3.用户变量 加@符号，不用指定类型
 	  局部变量 一般不用加@,需要指定类型
-	  
-	  
-	  
-	  #变量
-一、全局变量
-
-作用域：针对于所有会话（连接）有效，但不能跨重启
-
-	查看所有全局变量
-	SHOW GLOBAL VARIABLES;
-	查看满足条件的部分系统变量
-	SHOW GLOBAL VARIABLES LIKE '%char%';
-	查看指定的系统变量的值
-	SELECT @@global.autocommit;
-	为某个系统变量赋值
-	SET @@global.autocommit=0;
-	SET GLOBAL autocommit=0;
-
-二、会话变量
-
-作用域：针对于当前会话（连接）有效
-
-	查看所有会话变量
-	SHOW SESSION VARIABLES;
-	查看满足条件的部分会话变量
-	SHOW SESSION VARIABLES LIKE '%char%';
-	查看指定的会话变量的值
-	SELECT @@autocommit;
-	SELECT @@session.tx_isolation;
-	为某个会话变量赋值
-	SET @@session.tx_isolation='read-uncommitted';
-	SET SESSION tx_isolation='read-committed';
-
-
-二、自定义变量
-说明：
-1、用户变量
-作用域：针对于当前连接（会话）生效
-位置：begin end里面，也可以放在外面
-使用：
-
-①声明并赋值：
-set @变量名=值;或
-set @变量名:=值;或
-select @变量名:=值;
-
-②更新值
-方式一：
-	set @变量名=值;或
-	set @变量名:=值;或
-	select @变量名:=值;
-方式二：
-	select xx into @变量名 from 表;
-
-③使用
-select @变量名;
-
-
-
-2、局部变量
-作用域：仅仅在定义它的begin end中有效
-位置：只能放在begin end中，而且只能放在第一句
-使用：
-①声明
-declare 变量名 类型 【default 值】;
-②赋值或更新
-方式一：
-	set 变量名=值;或
-	set 变量名:=值;或
-	select @变量名:=值;
-方式二：
-	select xx into 变量名 from 表;
-③使用
-select 变量名;
+  
 
 ### 常见的约束
 
@@ -580,7 +538,7 @@ select 变量名;
 	select @@tx_isolation;
 	
 
-# 其它.
+# 其它
 
 ### 视图
 
