@@ -703,89 +703,14 @@
 
 ### 流程控制结构
 
-分支结构
+* 分支结构
 
-语法：
-if(条件，值1，值2)
-
-2、case结构
-
-语法1：
-case 表达式或字段
-when 值1 then 语句1;
-when 值2 then 语句2；
-..
-else 语句n;
-end [case];
-
-语法2：
-case 
-when 条件1 then 语句1;
-when 条件2 then 语句2；
-..
-else 语句n;
-end [case];
-
-如果放在begin end 外面，作为表达式结合着其他语句使用
-如果放在begin end 里面，一般作为独立的语句使用
-
-3、if结构
-功能：实现多分支
-语法：
-if 条件1 then 语句1;
-elseif 条件2 then 语句2;
-...
-else 语句n;
-end if;
-位置：
-只能放在begin end中
-
-
-循环结构
-
-位置：
-只能放在begin end中
-
-特点：都能实现循环结构
-
-对比：
-
-①这三种循环都可以省略名称，但如果循环中添加了循环控制语句（leave或iterate）则必须添加名称
-②
-loop 一般用于实现简单的死循环
-while 先判断后执行
-repeat 先执行后判断，无条件至少执行一次
-
-
-1、while
-语法：
-【名称:】while 循环条件 do
-		循环体
-end while 【名称】;
-2、loop
-语法：
-【名称：】loop
-		循环体
-end loop 【名称】;
-
-3、repeat
-语法：
-【名称:】repeat
-		循环体
-until 结束条件 
-end repeat 【名称】;
-
-二、循环控制语句
-leave：类似于break，用于跳出所在的循环
-iterate：类似于continue，用于结束本次循环，继续下一次
-
-###分支
-一、if函数
+if函数
 
 	语法：if(条件，值1，值2)
 	特点：可以用在任何位置
 
-二、case语句
+case语句
 
 语法：
 
@@ -806,10 +731,7 @@ iterate：类似于continue，用于结束本次循环，继续下一次
 	end 【case】（如果是放在begin end中需要加上case，如果放在select后面不需要）
 
 
-特点：
-	可以用在任何位置
-
-三、if elseif语句
+if elseif语句
 
 语法：
 
@@ -820,32 +742,45 @@ iterate：类似于continue，用于结束本次循环，继续下一次
 	end if;
 
 特点：
+	
 	只能用在begin end中！！！！！！！！！！！！！！！
 
 
 三者比较：
-			应用场合
+
+			  应用场合
 	if函数		简单双分支
 	case结构	等值判断 的多分支
 	if结构		区间判断 的多分支
 
 
-###循环
+* 循环结构
 
-语法：
+1、while
 
-
-	【标签：】WHILE 循环条件  DO
+	【名称:】while 循环条件 do
 		循环体
-	END WHILE 【标签】;
+	end while 【名称】;
 	
-特点：
+2、loop
 
-	只能放在BEGIN END里面
+	【名称：】loop
+		循环体
+	end loop 【名称】;
 
-	如果要搭配leave跳转语句，需要使用标签，否则可以不用标签
+3、repeat
 
-	leave类似于java中的break语句，跳出所在循环！！！
+	【名称:】repeat
+		循环体
+	until 结束条件 
+	end repeat 【名称】;
+
+* 循环控制语句
+	
+		leave：类似于break，用于跳出所在的循环
+		iterate：类似于continue，用于结束本次循环，继续下一次
+
+
 	
 
 
