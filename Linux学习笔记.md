@@ -2744,7 +2744,7 @@ chmod +x test2.sh
 
 **注：** 被包含的文件 test1.sh 不需要可执行权限.
 
-
+```
 打开终端：ctrl+alt+t
 清屏：ctrl+l
 在终端在退出锁定：ctrl+c
@@ -2765,7 +2765,6 @@ chmod +x test2.sh
 	.\c...\01jibi\biji.txt
 	..\c...\01biji\biji.txt
 
-```
 文件：在计算机中一切皆文件 
 在windows中区分文件可以通过扩展名来区分 .exe .txt .ppt
 在Linux中文件没有扩展名 可以通过颜色区分 也可以通过命令来区分 file 文件名
