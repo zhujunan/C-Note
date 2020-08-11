@@ -172,7 +172,8 @@
 		date_format将日期转换成字符
 		
 5、其他函数
-
+		
+		ifnull(字段名,值)若字段为null，则替换为值
 		version版本
 		database当前库
 		user当前连接用户
