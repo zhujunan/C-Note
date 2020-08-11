@@ -173,7 +173,7 @@
 		
 5、其他函数
 		
-		ifnull(字段名,值)若字段为null，则替换为值
+		ifnull(字段名/函数,值)若字段为null，则返回指定值
 		version版本
 		database当前库
 		user当前连接用户
