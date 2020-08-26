@@ -157,6 +157,20 @@
 
     旧的方法 : str="...%s...%s..."%(数据1,数据2,...)%s填充字符串 %d填充数字 %f小数
     新的方案 : f-string str=f"..."  且 %s换为{数据1}
+
+## 常用函数
+
+常用函数|含义
+--|--
+upper()|
+strip()|去掉两侧空白
+replace()|
+split()|
+startwith()|判断是否以...开头
+find()|
+cout()|
+isdigit()|判断是否纯数字
+join()|列表组合成字符串
     
 ## 索引
 
@@ -164,6 +178,9 @@
     str[0]   str[-1]倒数第一个字
 
 ## 切片
+
+    str[start:end] 从 start 取到 end-1
+    str[start:end:步长] 步长可以为负数
 
     
 
