@@ -103,7 +103,16 @@
 
 5.成员运算     '...' in str/not in...
 
-6.条件运算符（三元运算符）    
+6.条件运算符（三元运算符）  
+
+# bytes类型
+
+    字符串unicode
+    在内存中用utf-8代替unicode储存字符串,另gbk
+    str2 = str1.encode("utf-8")     
+    得到str2 = b'\xe4\xb8\...' bytes类型
+    解码:decode
+
 
 # 流程控制语句
 
