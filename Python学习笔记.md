@@ -105,15 +105,6 @@
 
 6.条件运算符（三元运算符）  
 
-# bytes类型
-
-    字符串unicode
-    在内存中用utf-8代替unicode储存字符串,另gbk
-    str2 = str1.encode("utf-8")     
-    得到str2 = b'\xe4\xb8\...' bytes类型
-    解码:decode
-
-
 # 流程控制语句
 
 ## 条件判断语句（if语句）
@@ -154,10 +145,26 @@
 
 # 基础数据类型
 
+## bytes类型
+
+    字符串unicode
+    在内存中用utf-8代替unicode储存字符串,另gbk
+    str2 = str1.encode("utf-8")     
+    得到str2 = b'\xe4\xb8\...' bytes类型
+    解码:decode
+    
 ## 字符串的格式化
 
     旧的方法 : str="...%s...%s..."%(数据1,数据2,...)%s填充字符串 %d填充数字 %f小数
     新的方案 : f-string str=f"..."  且 %s换为{数据1}
+    
+## 索引
+
+    类似于c语言的字符数组
+    str[0]   str[-1]倒数第一个字
+
+## 切片
+
     
 
 # 序列
