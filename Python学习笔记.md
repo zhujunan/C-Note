@@ -182,11 +182,19 @@ join()|列表组合成字符串
     str[start:end] 从 start 取到 end-1
     str[start:end:步长] 步长可以为负数
 
-    
+## 迭代
 
+    for (定义)变量 in 可迭代对象:
+        语句
+        
 # 序列
 
 ## 列表（list）
+
+    append()    增加数据
+    remove()    删除数据
+    list[index] = value     修改数据
+
 
 ## 序列（sequence）
 
