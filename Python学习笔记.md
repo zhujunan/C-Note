@@ -191,9 +191,16 @@ join()|列表组合成字符串
 
 ## 列表（list）
 
-    append()    增加数据
+- 增加数据
+
+    ListName.append("...")   直接追加
+    ListName.append(n,"...") 在n处插入
+    
+    
     remove()    删除数据
     list[index] = value     修改数据
+    
+- 列表的索引规则和字符串一样
 
 
 ## 序列（sequence）
