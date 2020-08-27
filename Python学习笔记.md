@@ -203,18 +203,42 @@ join()|列表组合成字符串
     
 -  删除数据
    
-   delectd = ListName.pop(n) 删除最后n个,返回值是删除部分
+   delectd = ListName.pop() 删除最后一个,返回值是删除部分
+   
+   ListName.pop(n) 删除第n个注意开头是0
    
    ListName.remove("") 删除指定元素
    
-   ListName.remove("")
+   ListName.clear() 清空
    
+   del ListName[1:3] 切片删除
 
     
 - 列表的索引规则和字符串一样
 
     list[index] = value     修改数据
+    
+    list[1:4:3] = value     步长为3
 
+- 列表查询同字符串
+
+- 其它操作
+
+    ListName.court()    查询出现的次数
+    
+    ListName.sort()    排序，默认升序
+    
+    ListName.sort(reverse=True) 降序
+    
+    ListName.reverse() 倒过来
+    
+    len(ListName)
+    
+    
+## 元组(tuple)
+
+    只能看不能改的列表
+    tuple(...)
 
 ## 序列（sequence）
 
@@ -250,15 +274,23 @@ join()|列表组合成字符串
 ## 字典（dict）
 
     - 字典属于一种新的数据结构，称为映射（mapping）
-    - 字典的作用和列表类似，都是用来存储对象的容器
-    - 列表存储数据的性能很好，但是查询数据的性能的很差
     - 在字典中每一个元素都有一个唯一的名字，通过这个唯一的名字可以快速的查找到指定的元素
-    - 在查询元素时，字典的效率是非常快的
     - 在字典中可以保存多个对象，每个对象都会有一个唯一的名字
         这个唯一的名字，我们称其为键（key），通过key可以快速的查询value
-        这个对象，我们称其为值（value）
         所以字典，我们也称为叫做键值对（key-value）结构
         每个字典中都可以有多个键值对，而每一个键值对我们称其为一项（item）
+        
+语法: 
+
+    {key1:value1,...} key可哈希即不可变,不能用列表
+    调用 DictName[key1]
+      
+操作:
+    
+    
+
+
+
 
 ## 集合（set）
 
