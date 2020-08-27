@@ -191,16 +191,29 @@ join()|列表组合成字符串
 
 ## 列表（list）
 
+    lst = ["","",...]
+
 - 增加数据
 
     ListName.append("...")   直接追加
-    ListName.append(n,"...") 在n处插入
     
+    ListName.insert(n,"...") 在n处插入
     
-    remove()    删除数据
-    list[index] = value     修改数据
+    ListName.extend("list")  迭代新增
+    
+-  删除数据
+   
+   delectd = ListName.pop(n) 删除最后n个,返回值是删除部分
+   
+   ListName.remove("") 删除指定元素
+   
+   ListName.remove("")
+   
+
     
 - 列表的索引规则和字符串一样
+
+    list[index] = value     修改数据
 
 
 ## 序列（sequence）
