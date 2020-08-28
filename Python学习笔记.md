@@ -47,6 +47,10 @@
 
     input():
     input(str),打印str，同时接收并返回输入的值作为字符串保存
+    
+## 解构
+
+    a,b,c = [1,2,3]
 
 ## 对象（object）
 
@@ -284,12 +288,38 @@ join()|列表组合成字符串
 
     {key1:value1,...} key可哈希即不可变,不能用列表
     调用 DictName[key1]
+    DictName.keys()
+    DictName.values()
+    DictName.items()
+
       
 操作:
-    
-    
 
+- 添加
 
+    DictName["key1"] = "value1" 若没有,则创建
+    
+    DictName.setdefault("...","...") 同上,会返回value
+    
+- 修改
+
+    DictName["key1"] = "value1"
+    
+- 删除
+
+    DictName.pop("key1")  返回删除的值
+    
+    del DictName["key1"]
+    
+    DictName.popitem()
+    
+    DictName.clear()
+    
+- 查询
+
+    DictName["key1"]
+    
+    DictName.get("key1")
 
 
 ## 集合（set）
