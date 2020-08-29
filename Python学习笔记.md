@@ -486,9 +486,35 @@ join()|列表组合成字符串
         raise语句后需要跟一个异常类 或 异常的实例
 
 ## 文件（File）
-    - 通过Python程序来对计算机中的各种文件进行增删改查的操作
-    - I/O(Input / Output)
-    - 操作文件的步骤：
-        ① 打开文件
-        ② 对文件进行各种操作（读、写），然后保存
-        ③ 关闭文件
+
+    f = open("...",mode="",encoding="utf-8")
+    content = f.read()
+    f.close
+    
+- 打开文件模式
+
+    r,w,a,r+,rb,r+b,...
+    rb  读出来的是bytes类型
+    
+- 文件修改
+
+    import os
+    
+    with open("file_old",mode="r",encoding="utf-8") as f1,\
+         open("file_new",mode="r",encoding="utf-8") as f2:
+    content = f1.read()
+    new_content = content.replace("1","2")
+    f2.write(new_content)
+    
+    os.remove("file_old")
+    os.rename("file_new","file_old")
+    
+    占用内存过大,可以改为:
+    
+    for line in f1:
+        new_line = line.replace("1","2")
+        f2.write(new_line)
+         
+
+
+
