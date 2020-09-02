@@ -1,3 +1,5 @@
+# 接收网页返回的数据
+
 #!/usr/bin/env python 
 # -*- coding:utf-8 -*-
 import requests
