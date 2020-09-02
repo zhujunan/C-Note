@@ -1,3 +1,5 @@
+# UA伪装 & 指定URL携带的参数
+
 #!/usr/bin/env python 
 # -*- coding:utf-8 -*-
 
